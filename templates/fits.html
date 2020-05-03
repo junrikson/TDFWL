@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Matthew M. Dean">
+
+    <title>Your Fittings</title>
+<style>
+
+</style>
+</head>
+
+<body>
+
+{% if not current_user.is_authenticated %}
+<a href="{{ url_for('login') }}">
+    <img src="https://images.contentful.com/idjq7aai9ylm/18BxKSXCymyqY4QKo8KwKe/c2bdded6118472dd587c8107f24104d7/EVE_SSO_Login_Buttons_Small_White.png?w=195&amp;h=30" alt="Log in with eveonline.com" />
+</a>
+
+{% else %}
+Hello <strong>{{ current_user.character_name }}</strong><br>
+<br>
+
+<form action="/signup" method="post">
+  <textarea name="fit" rows="50" cols="50"></textarea>
+  <input type="submit" value="Signup"></input>
+</form>
+
+<a href="{{ url_for('logout') }}">Logout</a>
+{% endif %}
