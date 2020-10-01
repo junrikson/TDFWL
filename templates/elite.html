@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Matthew M. Dean">
+
+    <title>Skills Check</title>
+<style>
+table {
+  width:360px;
+}
+table, th{
+  border: 1px solid black;
+  border-collapse: collapse;
+
+}
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+ }
+table#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+table#t01 th {
+  background-color: black;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+{% if not current_user.is_authenticated %}
+<a href="{{ url_for('login') }}">
+    <img src="https://images.contentful.com/idjq7aai9ylm/18BxKSXCymyqY4QKo8KwKe/c2bdded6118472dd587c8107f24104d7/EVE_SSO_Login_Buttons_Small_White.png?w=195&amp;h=30" alt="Log in with eveonline.com" />
+</a>
+
+{% else %}
+Hello <strong>{{ c_name }}</strong><br>
+<br>Elite Skill Check<br>
+* ignore if not relevent to your ship
+<table>
+
+    <td><strong>ARMOR</strong>
+<table id="t01">
+<tr><td>EM Armor Compensation<td>5{{searchskill(c_id,1,22806) }}
+<tr><td>Explosive Armor Compensation<td>5{{searchskill(c_id,1,22807) }}
+<tr><td>Kinetic Armor Compensation<td>5{{searchskill(c_id,1,22808) }}
+<tr><td>Thermal Armor Compensation<td>5{{searchskill(c_id,1,22809) }}
+<tr><td>Hull Upgrades<td>5{{searchskill(c_id,1,3394) }}
+<tr><td>Remote Armor Repair Systems*<td>4{{searchskill(c_id,1,16069) }}
+<tr><td>Armor Layering<td>4{{searchskill(c_id,1,33078) }}
+<tr><td>Armor Rigging<td>4{{searchskill(c_id,1,26253) }}
+
+
+</table>
+
+<br><br><strong>DRONES</strong><br><br>
+<table id="t01">
+    <tr><td>Gallente Drone Specialization<td>4{{searchskill(c_id,1,12486) }}
+<tr><td>Drone Avionics<td>4{{searchskill(c_id,1,3437) }}
+<tr><td>Advanced Drone Avionics<td>4{{searchskill(c_id,1,23566) }}
+<tr><td>Drone Interfacing<td>4{{searchskill(c_id,1,3442) }}
+<tr><td>Drone Navigation<td>4{{searchskill(c_id,1,12305) }}
+<tr><td>Drone Durability<td>4{{searchskill(c_id,1,23618) }}
+<tr><td>Drone Sharpshooting<td>4{{searchskill(c_id,1,23606) }}
+<tr><td>Drones<td>5{{searchskill(c_id,1,3436) }}
+<tr><td>Heavy Drone Operation*<td>5{{searchskill(c_id,1,3441) }}
+<tr><td>Light Drone Operation*<td>5{{searchskill(c_id,1,24241) }}
+<tr><td>Medium Drone Operation*<td>5{{searchskill(c_id,1,33699) }}
+</TABLE>
+<td>
+<br><br><strong>ENGINEERING</strong><br><br>
+<table id="t01">
+<tr><td>Capacitor Management<td>5{{searchskill(c_id,1,3418) }}
+<tr><td>Capacitor Systems Operation<td>5{{searchskill(c_id,1,3417) }}
+<tr><td>Capacitor Emission Systems*<td>4{{searchskill(c_id,1,3423) }}
+<tr><td>CPU Management*<td>5{{searchskill(c_id,1,3426) }}
+<tr><td>Power Grid Management*<td>5{{searchskill(c_id,1,3413) }}
+<tr><td>Thermodynamics<td>4{{searchskill(c_id,1,28164) }}
+<tr><td>Weapon Upgrades*<td>5{{searchskill(c_id,1,3318) }}
+<tr><td>Adv Weapon Upgrades*<td>1{{searchskill(c_id,1,11207) }}
+</TABLE>
+
+<br><br><strong>NAVIGATION</strong><br><br>
+<table id="t01">
+<tr><td>Acceleration Control<td>4{{searchskill(c_id,1,3452) }}
+<tr><td>Evasive Maneuvering<td>4{{searchskill(c_id,1,3453) }}
+<tr><td>High Speed Maneuvering<td>4{{searchskill(c_id,1,3454) }}
+<tr><td>Navigation<td>5{{searchskill(c_id,1,3449) }}
+<tr><td>Warp Drive Operation<td>5{{searchskill(c_id,1,3455) }}
+</TABLE>
+<td>
+<br><br><strong>TARGETING</strong><br><br>
+<table id="t01">
+<tr><td>Signature Analysis<td>5{{searchskill(c_id,1,3431) }}
+<tr><td>Target Management<td>5{{searchskill(c_id,1,3429) }}
+<tr><td>Advanced Target Management*<td>3{{searchskill(c_id,1,3430) }}
+<tr><td>Long Range Targetting<td>5{{searchskill(c_id,1,3428) }}
+
+</table>
+
+<br><br><strong>GUNNERY</strong><br><br>
+<table id="t01">
+<tr><td>Controlled Bursts<td>4{{searchskill(c_id,1,3316) }}
+<tr><td>Motion Prediction<td>5{{searchskill(c_id,1,3312) }}
+<tr><td>Rapid Firing<td>5{{searchskill(c_id,1,3310) }}
+<tr><td>Sharpshooter<td>5{{searchskill(c_id,1,3311) }}
+<tr><td>Surgical Strike<td>4{{searchskill(c_id,1,3315) }}
+<tr><td>Trajectory Analysis<td>4{{searchskill(c_id,1,3317) }}
+<tr><td>Large Blaster Specialization*<td>4{{searchskill(c_id,1,12212) }}
+<tr><td>Large Pulse Laser Specialization*<td>4{{searchskill(c_id,1,12215) }}
+<tr><td>Large Disintegrator Specialization*<td>4{{searchskill(c_id,1,47875) }}
+
+</table>
+    <td>
+<br><br><strong>SPACESHIP</strong><br><br>
+<table id="t01">
+<tr><td>Amarr Battleship*<td>4{{searchskill(c_id,1,3339) }}
+<tr><td>Galante Battleship*<td>4{{searchskill(c_id,1,3336) }}
+<tr><td>Minmatar Battleship*<td>4{{searchskill(c_id,1,3337) }}
+<tr><td>Precursor Battleship*<td>5{{searchskill(c_id,1,47869) }}
+
+</table>
+</table>
+
+* Leshak - CPU 5, PG 5H4, AWU 1 |
+* Paladin - CPU 5, WU 5, ATM 3
+{{ results }}
+<a href="{{ url_for('logout') }}">Logout</a>
+{% endif %}

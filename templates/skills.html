@@ -8,17 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Matthew M. Dean">
 
-    <title>Skills Check</title>
+    <title>Minimum Skills Check</title>
 <style>
 table {
-  width:400px;
+  width:360px;
 }
-table, th, td {
+table, th{
   border: 1px solid black;
   border-collapse: collapse;
+
 }
 th, td {
-  padding: 15px;
+  padding: 12px;
   text-align: left;
 }
 table#t01 tr:nth-child(even) {
@@ -36,78 +37,102 @@ table#t01 th {
 
 <body>
 
+
+
 {% if not current_user.is_authenticated %}
+Disclaimer:<br>
+This is a W.I.P. simple skill planning tool for <a href="https://dir-x.net/tdf/">The Ditanian Fleet</a>, an Incursion community in <a href="https://www.eveonline.com/">Eve Online</a>.
+<br><br>This tool will ask for the following scopes<br>
+<br>esi-skills.read_skills.v1 - allow importing of skills
+<br>esi-clones.read_implants.v1 - check active implants, not currently implemented
+
+<br><br>Questions/Feedback can be sent to IronSoul in-game. Hope to see you there!<br><br>
+<a href="https://dir-x.net/tdf/">TDF Website</a> - Google Spreadsheet of <a href="https://docs.google.com/spreadsheets/d/1G91rVSwIyxC5sgcj-O3tt5Vo1k1iNWwRjc5XqfX8tfo/edit#gid=0">required skills</a><br><br>
 <a href="{{ url_for('login') }}">
     <img src="https://images.contentful.com/idjq7aai9ylm/18BxKSXCymyqY4QKo8KwKe/c2bdded6118472dd587c8107f24104d7/EVE_SSO_Login_Buttons_Small_White.png?w=195&amp;h=30" alt="Log in with eveonline.com" />
 </a>
 
 {% else %}
-Hello <strong>{{ current_user.character_name }}</strong><br>
-<br>
+Hello <strong>{{ c_name }}</strong><br>
+<br>Minimum Skill Check. <b>Click <a href="/elite">here</a> for elite.</b><br>
+* Ignore if not relevent to your ship
+<table>
 
-<strong>ALL SHIPS</strong><br><br>
+    <td><strong>ARMOR</strong>
 <table id="t01">
-<tr><td>EM Armor Compensation<td>{{ searchskill(22806) }}
-<tr><td>Explosive Armor Compensation<td> {{ searchskill(22807) }}
-<tr><td>Kinetic Armor Compensation<td>{{ searchskill(22808) }}
-<tr><td>Thermal Armor Compensation<td>{{ searchskill(22809) }}
-<tr><td>Hull Upgrades<td>{{ searchskill(3394) }}
+<tr><td>EM Armor Compensation<td>4{{ searchskill(c_id,0,22806) }}
+<tr><td>Explosive Armor Compensation<td>4{{ searchskill(c_id,0,22807) }}
+<tr><td>Kinetic Armor Compensation<td>4{{ searchskill(c_id,0,22808) }}
+<tr><td>Thermal Armor Compensation<td>4{{ searchskill(c_id,0,22809) }}
+<tr><td>Hull Upgrades<td>4{{ searchskill(c_id,0,3394) }}
+<tr><td>Remote Armor Repair Systems*<td>3{{ searchskill(c_id,0,16069) }}
+<tr><td>Armor Layering<td>3{{ searchskill(c_id,0,33078) }}
+<tr><td>Armor Rigging<td>3{{ searchskill(c_id,0,26253) }}
+
+
 </table>
 
-<br><br><strong>LOGI PILOTS</strong><br><br>
+<br><br><strong>DRONES</strong><br><br>
 <table id="t01">
-<tr><td>Advanced Target Management<td>{{ searchskill(3430) }}
-<tr><td>Capacitor Management<td>{{ searchskill(3418) }}
-<tr><td>Capacitor Systems Operation<td>{{ searchskill(3417) }}
-<tr><td>Remote Armor Repair Systems<td>{{ searchskill(16069) }}
-<tr><td>Capacitor Emission Systems<td> {{ searchskill(3423) }}
-<tr><td>Sensor Linking<td>{{ searchskill(3433) }}
+<tr><td>Drone Avionics<td>3{{ searchskill(c_id,0,3437) }}
+<tr><td>Drone Interfacing<td>3{{ searchskill(c_id,0,3442) }}
+<tr><td>Drone Navigation<td>3{{ searchskill(c_id,0,12305) }}
+<tr><td>Drone Durability<td>3{{ searchskill(c_id,0,23618) }}
+<tr><td>Drone Sharpshooting<td>3{{ searchskill(c_id,0,23606) }}
+<tr><td>Drones<td>5{{ searchskill(c_id,0,3436) }}
+<tr><td>Heavy Drone Operation*<td>3{{ searchskill(c_id,0,3441) }}
+<tr><td>Light Drone Operation*<td>3{{ searchskill(c_id,0,24241) }}
+<tr><td>Medium Drone Operation*<td>3{{ searchskill(c_id,0,33699) }}
+</TABLE>
+<td>
+<br><br><strong>ENGINEERING</strong><br><br>
+<table id="t01">
+<tr><td>Capacitor Management<td>4{{ searchskill(c_id,0,3418) }}
+<tr><td>Capacitor Systems Operation<td>4{{ searchskill(c_id,0,3417) }}
+<tr><td>Capacitor Emission Systems*<td>3{{ searchskill(c_id,0,3423) }}
+<tr><td>Thermodynamics<td>3{{ searchskill(c_id,0,28164) }}
+</TABLE>
 
-<tr><td>Acceleration Control<td>{{ searchskill(3452) }}
-<tr><td>Afterburner<td>{{ searchskill(3450) }}
-<tr><td>Fuel Conservation<td>{{ searchskill(3451) }}
-<tr><td>Evasive Maneuvering<td>{{ searchskill(3452) }}
-<tr><td>High Speed Maneuvering<td>{{ searchskill(3454) }}
-<tr><td>Logistics Cruisers<td>{{ searchskill(12096) }}
+<br><br><strong>NAVIGATION</strong><br><br>
+<table id="t01">
+<tr><td>Acceleration Control<td>3{{ searchskill(c_id,0,3452) }}
+<tr><td>Evasive Maneuvering<td>3{{ searchskill(c_id,0,3452) }}
+<tr><td>High Speed Maneuvering<td>3{{ searchskill(c_id,0,3454) }}
+<tr><td>Navigation<td>5{{ searchskill(c_id,0,3449) }}
+<tr><td>Warp Drive Operation<td>3{{ searchskill(c_id,0,3455) }}
+</TABLE>
+<td>
+<br><br><strong>TARGETING</strong><br><br>
+<table id="t01">
+<tr><td>Signature Analysis<td>3{{ searchskill(c_id,0,3431) }}
+<tr><td>Target Management<td>4{{ searchskill(c_id,0,3429) }}
+<tr><td>Long Range Targetting<td>3{{ searchskill(c_id,0,3428) }}
 
-<tr><td>Amarr Battleship<td>{{ searchskill(3339) }}
 </table>
 
-<br><br><strong>UPGRADE THIS</strong><br><br>
+<br><br><strong>GUNNERY</strong><br><br>
 <table id="t01">
-<tr><td>Drone Avionics<td>{{ searchskill(3437) }}
-<tr><td>Drone Interfacing<td>{{ searchskill(3442) }}
-<tr><td>Drone Navigation<td>{{ searchskill(12305) }}
-<tr><td>Drones<td>{{ searchskill(3436) }}
-<tr><td>Heavy Drone Operation<td>{{ searchskill(3441) }}
-<tr><td>Light Drone Operation<td>{{ searchskill(24241) }}
-<tr><td>Medium Drone Operation<td>{{ searchskill(33699) }}
+<tr><td>Controlled Bursts<td>3{{ searchskill(c_id,0,3316) }}
+<tr><td>Motion Prediction<td>3{{ searchskill(c_id,0,3312) }}
+<tr><td>Rapid Firing<td>3{{ searchskill(c_id,0,3310) }}
+<tr><td>Sharpshooter<td>3{{ searchskill(c_id,0,3311) }}
+<tr><td>Surgical Strike<td>3{{ searchskill(c_id,0,3315) }}
+<tr><td>Trajectory Analysis<td>4{{ searchskill(c_id,0,3317) }}
+<tr><td>Large Hybrid Turret*<td>4{{ searchskill(c_id,0,3307) }}
+<tr><td>Large Energy Turret*<td>4{{ searchskill(c_id,0,3309) }}
+<tr><td>Large Disintegrator Specialization*<td>4{{ searchskill(c_id,0,47875) }}
 
-<tr><td>Sensor Linking<td>{{ searchskill(3433) }}
+</table>
+    <td>
+<br><br><strong>SPACESHIP</strong><br><br>
+<table id="t01">
+<tr><td>Amarr Battleship*<td>3{{ searchskill(c_id,0,3339) }}
+<tr><td>Galante Battleship*<td>3{{ searchskill(c_id,0,3336) }}
+<tr><td>Minmatar Battleship*<td>3{{searchskill(c_id,0,3337) }}
+<tr><td>Precursor Battleship*<td>5{{ searchskill(c_id,0,47869) }}
 
-<tr><td>Controlled Bursts<td>{{ searchskill(3316) }}
-<tr><td>Large Hybrid Turret<td> {{ searchskill(3307) }}
-<tr><td>Large Energy Turret<td> {{ searchskill(3309) }}
-<tr><td>Motion Prediction<td>{{ searchskill(3312) }}
-<tr><td>Rapid Firing<td>{{ searchskill(3310) }}
-<tr><td>Sharpshooter<td>{{ searchskill(3311) }}
-<tr><td>Surgical Strike<td>{{ searchskill(3315) }}
-<tr><td>Trajectory Analysis<td>{{ searchskill(3317) }}
 
-<tr><td>Acceleration Control<td>{{ searchskill(3452) }}
-<tr><td>Evasive Manuvering<td>{{ searchskill(3453) }}
-<tr><td>Fuel Conservation<td>{{ searchskill(3451) }}
-<tr><td>High Speed Maneuvering<td>{{ searchskill(3454) }}
-<tr><td>Navigation<td>{{ searchskill(3449) }}
-<tr><td>Warp Drive Operation<td>{{ searchskill(3455) }}
-
-<tr><td>Amarr Battleship<td>{{ searchskill(3339) }}
-<tr><td>Galante Battleship<td>{{ searchskill(3336) }}
-<tr><td>Caldari Battleship<td>{{ searchskill(3338) }}
-<tr><td>Minmatar Battleship<td>{{searchskill(3337) }}
-
-<tr><td>Signature Analysis<td>{{ searchskill(3431) }}
-<tr><td>Target Management<td>{{ searchskill(3429) }}
+</table>
 </table>
 
 <br><br>
